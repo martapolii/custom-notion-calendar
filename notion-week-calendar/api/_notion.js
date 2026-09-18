@@ -33,6 +33,17 @@ export function notesConfigOrError(res) {
   return { token, dataSourceId };
 }
 
+export function recurrenceConfigOrError(res) {
+  const token = process.env.NOTION_API_TOKEN;
+  const taskDataSourceId = process.env.NOTION_DATA_SOURCE_ID;
+  const ruleDataSourceId = process.env.NOTION_RECURRENCE_DATA_SOURCE_ID;
+  if (!token || !taskDataSourceId || !ruleDataSourceId) {
+    res.status(500).json({ error: "Notion recurrence environment variables are not configured." });
+    return null;
+  }
+  return { token, taskDataSourceId, ruleDataSourceId };
+}
+
 export async function notionFetch(path, token, options = {}) {
   const response = await fetch(`https://api.notion.com/v1${path}`, {
     ...options,
