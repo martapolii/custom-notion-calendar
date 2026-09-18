@@ -1,17 +1,18 @@
 # Notion Week Calendar
 
-A secure Vercel-hosted week view for Marta's Notion Tasks data source. It reads tasks by `Date`, writes checkbox changes to both `did?` and `status` (`TO DO` / `DONE`), and provides Notion-backed free-form daily notes.
+A secure Vercel-hosted week view for Marta's Notion Tasks data source. It reads tasks by `Date`, writes checkbox changes to both `did?` and `status` (`TO DO` / `DONE`), and provides Notion-backed free-form daily notes, plus daily/weekly/monthly recurring-task creation.
 
 ## Deploy to Vercel
 
 1. Create a Notion internal integration at https://www.notion.so/profile/integrations and copy its secret.
-2. Open the Tasks database in Notion, choose **••• → Connections**, and add that integration.
+2. Open the Tasks database, Daily Notes Storage, and Recurring Task Rules in Notion. For each one, choose **••• → Connections** and add that integration.
 3. Upload this project to a Git repository and import it at https://vercel.com/new, or deploy it with the Vercel CLI.
 4. Add these Vercel environment variables for Production, Preview, and Development:
    - `NOTION_API_TOKEN`: the Notion integration secret.
    - `NOTION_DATA_SOURCE_ID`: `48a7005e-e796-831a-be80-071072832343`
    - `CALENDAR_ACCESS_KEY`: a strong private password of your choice.
    - `NOTION_NOTES_DATA_SOURCE_ID`: `7bb51431-05d4-4e4d-b1a4-6603e8c46cef`
+   - `NOTION_RECURRENCE_DATA_SOURCE_ID`: `83b8c3bb-6dd7-4e83-8dd4-5c08498d6998`
 5. Redeploy, open the Vercel URL, and enter the calendar access key.
 6. In Notion, paste the Vercel URL and choose **Create embed**.
 

@@ -1,4 +1,5 @@
 import { authorize, configOrError, notionFetch } from "./_notion.js";
+import { generateForRange } from "./_recurrence.js";
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
@@ -13,6 +14,13 @@ export default async function handler(req, res) {
   }
 
   try {
+    if (process.env.NOTION_RECURRENCE_DATA_SOURCE_ID) {
+      try {
+        await generateForRange({ token: config.token, taskDataSourceId: config.dataSourceId, ruleDataSourceId: process.env.NOTION_RECURRENCE_DATA_SOURCE_ID }, start, end);
+      } catch (generationError) {
+        console.error("Recurring task generation failed:", generationError);
+      }
+    }
     const results = [];
     let cursor;
     do {
