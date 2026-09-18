@@ -17,7 +17,17 @@ export function configOrError(res) {
   const token = process.env.NOTION_API_TOKEN;
   const dataSourceId = process.env.NOTION_DATA_SOURCE_ID;
   if (!token || !dataSourceId) {
-    res.status(500).json({ error: "Notion environment variables are not configured." });
+    res.status(500).json({ error: "Notion task environment variables are not configured." });
+    return null;
+  }
+  return { token, dataSourceId };
+}
+
+export function notesConfigOrError(res) {
+  const token = process.env.NOTION_API_TOKEN;
+  const dataSourceId = process.env.NOTION_NOTES_DATA_SOURCE_ID;
+  if (!token || !dataSourceId) {
+    res.status(500).json({ error: "Notion notes environment variables are not configured." });
     return null;
   }
   return { token, dataSourceId };
